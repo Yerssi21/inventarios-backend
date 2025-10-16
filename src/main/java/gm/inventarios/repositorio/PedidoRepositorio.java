@@ -1,0 +1,9 @@
+package gm.inventarios.repositorio;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import gm.inventarios.modelo.Pedido;
+
+public interface PedidoRepositorio  extends JpaRepository<Pedido, Long>{
+
+}
