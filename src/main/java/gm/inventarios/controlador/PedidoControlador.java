@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gm.inventarios.modelo.Pedido;
+import gm.inventarios.modelo.PedidoDetalle;
 import gm.inventarios.servicio.IPedidoServicio;
 
 @RestController
@@ -29,7 +30,7 @@ public class PedidoControlador {
     @Autowired
     private IPedidoServicio pedidoServicio;
 
-    // GET: listar pedidos
+    // GET: listar todos los pedidos con detalles
     @GetMapping("/pedidos")
     public List<Pedido> obtenerPedidos() {
         List<Pedido> pedidos = this.pedidoServicio.listarPedidos();
@@ -47,6 +48,13 @@ public class PedidoControlador {
     // POST: crear pedido
     @PostMapping("/pedidos")
     public void agregarPedido(@RequestBody Pedido pedido) {
+    	 // Asignar el pedido a cada detalle
+        if (pedido.getDetalles() != null) {
+            for (PedidoDetalle detalle : pedido.getDetalles()) {
+                detalle.setPedido(pedido);
+            }
+        }
+
         this.pedidoServicio.guardarPedido(pedido);
         logger.info("Pedido agregado: {}", pedido);
     }

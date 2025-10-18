@@ -58,10 +58,22 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- iText 7 para PDF -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>kernel</artifactId>
+            <version>7.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>7.2.6</version>
+        </dependency>
+
     </dependencies>
 
     <build>
-        <!-- Evitar filtrado de resources para prevenir MalformedInputException -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -70,7 +82,7 @@
         </resources>
 
         <plugins>
-            <!-- Configuración Maven Compiler para Java 21 -->
+            <!-- Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

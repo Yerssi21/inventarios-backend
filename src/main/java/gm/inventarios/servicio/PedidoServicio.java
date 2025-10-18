@@ -15,12 +15,13 @@ public class PedidoServicio implements IPedidoServicio {
 
     @Override
     public List<Pedido> listarPedidos() {
-        return this.pedidoRepositorio.findAll();
+        // Ahora trae también los detalles y productos
+        return pedidoRepositorio.findAllConDetalles();
     }
 
     @Override
     public Pedido buscarPedidoPorId(Long idPedido) {
-        return this.pedidoRepositorio.findById(idPedido).orElse(null);
+        return pedidoRepositorio.findPedidoConDetalles(idPedido);
     }
 
     @Override

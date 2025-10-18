@@ -1,29 +1,27 @@
 package gm.inventarios.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PedidoDetalle {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long idDetallePedido;
 
-	Integer cantidad;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idDetallePedido;
 
-	@ManyToOne
-	Producto producto;
+    private Integer cantidad;
 
-	@ManyToOne
-	Pedido pedido;
+    @ManyToOne
+    @ToString.Exclude  // 👈 Evita recursion infinita al imprimir
+    private Producto producto;
 
-} 
+    @ManyToOne
+    @JsonBackReference // 👈 Indica la parte "inversa" del vínculo
+    @ToString.Exclude
+    private Pedido pedido;
+}
